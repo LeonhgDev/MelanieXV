@@ -1,0 +1,53 @@
+<p-toast position="top-center" />
+<app-audio-player />
+
+<app-hero />
+
+<main id="contenido" class="mx-auto flex max-w-3xl flex-col gap-20 px-6 py-20">
+  <!-- Contador regresivo -->
+  <section appReveal aria-labelledby="titulo-contador">
+    <h2 id="titulo-contador" class="mb-8 text-center font-script text-5xl text-rose-600">
+      Falta muy poco
+    </h2>
+    <app-countdown />
+  </section>
+
+  <!-- Ubicaciones -->
+  <section appReveal aria-labelledby="titulo-ubicaciones">
+    <h2 id="titulo-ubicaciones" class="mb-8 text-center font-script text-5xl text-rose-600">
+      ¿Dónde y cuándo?
+    </h2>
+    <app-locations />
+  </section>
+
+  <!-- Código de vestimenta -->
+  <section appReveal aria-labelledby="titulo-vestimenta">
+    <h2 id="titulo-vestimenta" class="mb-8 text-center font-script text-5xl text-rose-600">
+      Código de vestimenta
+    </h2>
+    <app-dress-code />
+  </section>
+
+  <!-- Mesa de regalos -->
+  <section appReveal aria-labelledby="titulo-regalos">
+    <h2 id="titulo-regalos" class="mb-8 text-center font-script text-5xl text-rose-600">
+      Mesa de regalos
+    </h2>
+    <app-gifts />
+  </section>
+
+  <!-- Confirmación de asistencia -->
+  <section appReveal aria-labelledby="titulo-rsvp">
+    <h2 id="titulo-rsvp" class="mb-8 text-center font-script text-5xl text-rose-600">
+      ¿Contamos contigo?
+    </h2>
+    <app-rsvp />
+  </section>
+</main>
+
+<footer class="pb-24 text-center">
+  <p class="font-script text-4xl text-rose-600">¡No faltes!</p>
+  <p class="mt-3 text-sm font-light tracking-widest text-stone-500 uppercase">
+    {{ config.nombreQuinceanera }} · Mis XV Años
+  </p>
+</footer>
