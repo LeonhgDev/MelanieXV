@@ -209,6 +209,54 @@ body {
   );
 }
 
+/* Fondos coloridos: los tres primeros se tiñen con la paleta activa */
+
+.fondo-pastel {
+  background-color: color-mix(in srgb, var(--tema-acento) 12%, white);
+}
+
+.fondo-intenso {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--tema-acento) 32%, white),
+    color-mix(in srgb, var(--tema-acento-suave) 55%, white) 50%,
+    color-mix(in srgb, var(--tema-acento) 18%, white)
+  );
+}
+
+.fondo-aurora {
+  background-color: var(--tema-fondo);
+  background-image:
+    radial-gradient(
+      60% 40% at 12% 5%,
+      color-mix(in srgb, var(--tema-acento-suave) 60%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 35% at 88% 35%,
+      color-mix(in srgb, var(--tema-acento-claro) 75%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 35% at 45% 98%,
+      color-mix(in srgb, var(--tema-acento) 24%, transparent),
+      transparent 70%
+    );
+}
+
+.fondo-amanecer {
+  background: linear-gradient(180deg, #fbdfe3, #fdf1d3 45%, #d9edfd);
+}
+
+.fondo-algodon {
+  background-color: #fdf9ff;
+  background-image:
+    radial-gradient(45% 35% at 15% 10%, #f9c7e0, transparent 70%),
+    radial-gradient(50% 30% at 85% 25%, #bcd9fc, transparent 70%),
+    radial-gradient(45% 30% at 25% 60%, #d8cffb, transparent 70%),
+    radial-gradient(50% 35% at 80% 90%, #f9d8c2, transparent 70%);
+}
+
 /* Animación de entrada: la directiva RevealOnScroll agrega .is-visible */
 .reveal {
   opacity: 0;

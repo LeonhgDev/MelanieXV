@@ -63,14 +63,24 @@ export class ThemeService {
     { id: 'degradado', nombre: 'Degradado', clase: 'fondo-degradado' },
     { id: 'puntos', nombre: 'Puntos', clase: 'fondo-puntos' },
     { id: 'lineas', nombre: 'Líneas', clase: 'fondo-lineas' },
+    { id: 'pastel', nombre: 'Pastel', clase: 'fondo-pastel' },
+    { id: 'intenso', nombre: 'Intenso', clase: 'fondo-intenso' },
+    { id: 'aurora', nombre: 'Aurora', clase: 'fondo-aurora' },
+    { id: 'amanecer', nombre: 'Amanecer', clase: 'fondo-amanecer' },
+    { id: 'algodon', nombre: 'Algodón', clase: 'fondo-algodon' },
   ];
 
-  readonly paleta = signal<OpcionPaleta>(this.paletas[0]);
-  readonly fuente = signal<OpcionFuente>(this.fuentes[0]);
-  readonly fondo = signal<OpcionFondo>(this.fondos[0]);
+  /** Valores por defecto: paleta Océano, fuente Sacramento, fondo Claro. */
+  readonly paleta = signal<OpcionPaleta>(this.buscar(this.paletas, 'oceano'));
+  readonly fuente = signal<OpcionFuente>(this.buscar(this.fuentes, 'sacramento'));
+  readonly fondo = signal<OpcionFondo>(this.buscar(this.fondos, 'claro'));
 
   /** Clases combinadas para el contenedor raíz. */
   readonly clases = computed(
     () => `${this.paleta().clase} ${this.fuente().clase} ${this.fondo().clase}`,
   );
+
+  private buscar<T extends { id: string }>(opciones: readonly T[], id: string): T {
+    return opciones.find((opcion) => opcion.id === id) ?? opciones[0];
+  }
 }
