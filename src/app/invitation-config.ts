@@ -68,7 +68,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
   fechaEvento: new Date('2026-08-08T18:45:00'),
   codigoPaisWhatsapp: '52',
   whatsappConfirmacion: '5545329137',
-  whatsappFelicitaciones: '5591069496',
+  whatsappFelicitaciones: '5638206542',
   familia: {
     grupos: [
       { titulo: 'Mis padres', nombres: ['Alma Jiménez', 'Gume León'] },

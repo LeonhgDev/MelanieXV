@@ -78,6 +78,53 @@ import { INVITATION_CONFIG } from '../invitation-config';
           }
         </div>
 
+        <!-- Nombres de la familia: color -->
+        <h4 class="mt-6 text-xs font-medium tracking-widest text-tinta-suave uppercase">
+          Color de nombres
+        </h4>
+        <div class="mt-3 grid grid-cols-6 gap-2">
+          @for (c of tema.coloresNombres; track c.id) {
+            <button
+              type="button"
+              (click)="tema.colorNombres.set(c)"
+              [attr.aria-label]="'Color de nombres ' + c.nombre"
+              [attr.aria-pressed]="tema.colorNombres().id === c.id"
+              [title]="c.nombre"
+              class="flex h-8 w-8 items-center justify-center rounded-full border border-white shadow-md transition-transform duration-200 hover:scale-110"
+              [class.ring-2]="tema.colorNombres().id === c.id"
+              [class.ring-offset-2]="tema.colorNombres().id === c.id"
+              [class.ring-tinta]="tema.colorNombres().id === c.id"
+              [style.background]="c.css"
+            >
+              @if (tema.colorNombres().id === c.id) {
+                <i class="pi pi-check text-[10px] text-white" aria-hidden="true"></i>
+              }
+            </button>
+          }
+        </div>
+
+        <!-- Nombres de la familia: letra -->
+        <h4 class="mt-6 text-xs font-medium tracking-widest text-tinta-suave uppercase">
+          Letra de nombres
+        </h4>
+        <div class="mt-3 flex flex-col gap-1">
+          @for (f of tema.fuentesNombres; track f.id) {
+            <button
+              type="button"
+              (click)="tema.fuenteNombres.set(f)"
+              [attr.aria-pressed]="tema.fuenteNombres().id === f.id"
+              class="flex items-center justify-between rounded-xl px-3 py-1 text-left transition-colors duration-200 hover:bg-acento-claro/40"
+            >
+              <span class="text-xl leading-tight text-tinta" [style.font-family]="f.familia">
+                {{ f.nombre }}
+              </span>
+              @if (tema.fuenteNombres().id === f.id) {
+                <i class="pi pi-check ml-2 shrink-0 text-[10px] text-acento" aria-hidden="true"></i>
+              }
+            </button>
+          }
+        </div>
+
         <!-- Fondo de página -->
         <h4 class="mt-6 text-xs font-medium tracking-widest text-tinta-suave uppercase">Fondo</h4>
         <div class="mt-3 grid grid-cols-3 gap-2">

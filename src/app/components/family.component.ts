@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ThemeService } from '../services/theme.service';
 import { INVITATION_CONFIG } from '../invitation-config';
 
 @Component({
@@ -11,7 +12,13 @@ import { INVITATION_CONFIG } from '../invitation-config';
         <div class="flex flex-col items-center gap-3">
           <h3 class="font-script text-4xl text-acento">{{ grupo.titulo }}</h3>
           @for (nombre of grupo.nombres; track nombre; let ultimo = $last) {
-            <p class="font-serif text-2xl tracking-wide text-tinta">{{ nombre }}</p>
+            <p
+              class="text-2xl tracking-wide"
+              [style.color]="tema.colorNombres().css"
+              [style.font-family]="tema.fuenteNombres().familia"
+            >
+              {{ nombre }}
+            </p>
             @if (!ultimo) {
               <span class="font-script text-2xl text-acento-suave" aria-hidden="true">&amp;</span>
             }
@@ -29,4 +36,5 @@ import { INVITATION_CONFIG } from '../invitation-config';
 })
 export class FamilyComponent {
   protected readonly familia = INVITATION_CONFIG.familia;
+  protected readonly tema = inject(ThemeService);
 }

@@ -22,6 +22,13 @@ export interface OpcionFondo {
   readonly clase: string;
 }
 
+export interface OpcionColorTexto {
+  readonly id: string;
+  readonly nombre: string;
+  /** Valor CSS del color (puede referir variables de la paleta activa). */
+  readonly css: string;
+}
+
 /**
  * Estado global de personalización visual (paleta, fuente del título y
  * fondo). Las clases activas se inyectan en el contenedor raíz (app.html)
@@ -70,10 +77,29 @@ export class ThemeService {
     { id: 'algodon', nombre: 'Algodón', clase: 'fondo-algodon' },
   ];
 
+  /** Estilos disponibles para los nombres de la familia (padres/padrinos). */
+  readonly fuentesNombres: readonly OpcionFuente[] = [
+    { id: 'serif', nombre: 'Cormorant (serif)', clase: '', familia: '"Cormorant Garamond", serif' },
+    { id: 'sans', nombre: 'Jost (moderna)', clase: '', familia: '"Jost", sans-serif' },
+    ...this.fuentes,
+  ];
+
+  /** Colores disponibles para los nombres: los primeros siguen a la paleta activa. */
+  readonly coloresNombres: readonly OpcionColorTexto[] = [
+    { id: 'tinta', nombre: 'Tinta', css: 'var(--tema-tinta)' },
+    { id: 'tinta-suave', nombre: 'Tinta suave', css: 'var(--tema-tinta-suave)' },
+    { id: 'acento', nombre: 'Acento', css: 'var(--tema-acento)' },
+    { id: 'acento-fuerte', nombre: 'Acento fuerte', css: 'var(--tema-acento-fuerte)' },
+    { id: 'dorado', nombre: 'Dorado', css: '#b45309' },
+    { id: 'vino', nombre: 'Vino', css: '#722f37' },
+  ];
+
   /** Valores por defecto: paleta Océano, fuente Sacramento, fondo Claro. */
   readonly paleta = signal<OpcionPaleta>(this.buscar(this.paletas, 'oceano'));
   readonly fuente = signal<OpcionFuente>(this.buscar(this.fuentes, 'sacramento'));
   readonly fondo = signal<OpcionFondo>(this.buscar(this.fondos, 'claro'));
+  readonly fuenteNombres = signal<OpcionFuente>(this.buscar(this.fuentesNombres, 'serif'));
+  readonly colorNombres = signal<OpcionColorTexto>(this.buscar(this.coloresNombres, 'tinta'));
 
   /** Clases combinadas para el contenedor raíz. */
   readonly clases = computed(
