@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
+import { INVITATION_CONFIG } from '../invitation-config';
 
 /**
- * Botón flotante TEMPORAL (entorno de pruebas) para alternar entre las
- * paletas 'romantic-rose' y 'ocean-blue' y compararlas en vivo.
+ * Panel flotante TEMPORAL (entorno de pruebas) para personalizar en vivo la
+ * paleta de colores, la fuente de los títulos y el fondo de la página.
  * Para retirarlo basta con quitar <app-theme-toggler /> de app.html.
  */
 @Component({
@@ -13,15 +14,97 @@ import { ThemeService } from '../services/theme.service';
   template: `
     <button
       type="button"
-      (click)="tema.alternar()"
-      [attr.aria-label]="'Cambiar tema. Tema actual: ' + tema.temaActual()"
-      [title]="'Tema: ' + tema.temaActual()"
-      class="fixed top-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/40 text-rose-600 shadow-xl shadow-stone-200/50 backdrop-blur-md transition-all duration-300 hover:scale-110 active:scale-95 ocean:border-slate-200/60 ocean:bg-white/50 ocean:text-blue-600 ocean:shadow-slate-200/50"
+      (click)="abierto.set(!abierto())"
+      [attr.aria-expanded]="abierto()"
+      aria-controls="panel-tema"
+      [attr.aria-label]="abierto() ? 'Cerrar personalización' : 'Personalizar diseño'"
+      class="fixed top-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/50 text-acento shadow-xl shadow-neutro/50 backdrop-blur-md transition-all duration-300 hover:scale-110 active:scale-95"
     >
-      <i class="pi pi-palette text-lg" aria-hidden="true"></i>
+      <i class="pi text-lg" [class.pi-palette]="!abierto()" [class.pi-times]="abierto()" aria-hidden="true"></i>
     </button>
+
+    @if (abierto()) {
+      <aside
+        id="panel-tema"
+        aria-label="Personalización del diseño"
+        class="fixed top-16 right-4 z-50 max-h-[75vh] w-72 overflow-y-auto rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl shadow-neutro/50 backdrop-blur-md"
+      >
+        <!-- Paleta de colores -->
+        <h4 class="text-xs font-medium tracking-widest text-tinta-suave uppercase">Paleta</h4>
+        <div class="mt-3 grid grid-cols-5 gap-2">
+          @for (p of tema.paletas; track p.id) {
+            <button
+              type="button"
+              (click)="tema.paleta.set(p)"
+              [attr.aria-label]="'Paleta ' + p.nombre"
+              [attr.aria-pressed]="tema.paleta().id === p.id"
+              [title]="p.nombre"
+              class="flex h-9 w-9 items-center justify-center rounded-full border border-white shadow-md transition-transform duration-200 hover:scale-110"
+              [class.ring-2]="tema.paleta().id === p.id"
+              [class.ring-offset-2]="tema.paleta().id === p.id"
+              [class.ring-tinta]="tema.paleta().id === p.id"
+              [style.background-color]="p.muestra"
+            >
+              @if (tema.paleta().id === p.id) {
+                <i class="pi pi-check text-xs text-white" aria-hidden="true"></i>
+              }
+            </button>
+          }
+        </div>
+
+        <!-- Fuente de títulos -->
+        <h4 class="mt-6 text-xs font-medium tracking-widest text-tinta-suave uppercase">
+          Fuente del título
+        </h4>
+        <div class="mt-3 flex flex-col gap-1">
+          @for (f of tema.fuentes; track f.id) {
+            <button
+              type="button"
+              (click)="tema.fuente.set(f)"
+              [attr.aria-pressed]="tema.fuente().id === f.id"
+              class="flex items-center justify-between rounded-xl px-3 py-1.5 text-left transition-colors duration-200 hover:bg-acento-claro/40"
+              [class.bg-acento-claro/60]="tema.fuente().id === f.id"
+            >
+              <span class="text-2xl leading-tight text-tinta" [style.font-family]="f.familia">
+                {{ nombreQuinceanera }}
+              </span>
+              <span class="ml-2 shrink-0 text-[10px] font-light text-tinta-suave">
+                {{ f.nombre }}
+                @if (tema.fuente().id === f.id) {
+                  <i class="pi pi-check ml-1 text-[10px] text-acento" aria-hidden="true"></i>
+                }
+              </span>
+            </button>
+          }
+        </div>
+
+        <!-- Fondo de página -->
+        <h4 class="mt-6 text-xs font-medium tracking-widest text-tinta-suave uppercase">Fondo</h4>
+        <div class="mt-3 grid grid-cols-3 gap-2">
+          @for (f of tema.fondos; track f.id) {
+            <button
+              type="button"
+              (click)="tema.fondo.set(f)"
+              [attr.aria-pressed]="tema.fondo().id === f.id"
+              class="flex flex-col items-center gap-1 rounded-xl p-1.5 transition-colors duration-200 hover:bg-acento-claro/40"
+            >
+              <span
+                class="h-9 w-full rounded-lg border shadow-sm"
+                [class]="f.clase"
+                [class.border-neutro]="tema.fondo().id !== f.id"
+                [class.border-acento]="tema.fondo().id === f.id"
+                aria-hidden="true"
+              ></span>
+              <span class="text-[10px] font-light text-tinta-suave">{{ f.nombre }}</span>
+            </button>
+          }
+        </div>
+      </aside>
+    }
   `,
 })
 export class ThemeTogglerComponent {
   protected readonly tema = inject(ThemeService);
+  protected readonly abierto = signal(false);
+  protected readonly nombreQuinceanera = INVITATION_CONFIG.nombreQuinceanera;
 }

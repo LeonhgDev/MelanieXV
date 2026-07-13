@@ -1,17 +1,76 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 
-export type Tema = 'romantic-rose' | 'ocean-blue';
+export interface OpcionPaleta {
+  readonly id: string;
+  readonly nombre: string;
+  readonly clase: string;
+  /** Color de acento para la muestra del selector. */
+  readonly muestra: string;
+}
+
+export interface OpcionFuente {
+  readonly id: string;
+  readonly nombre: string;
+  readonly clase: string;
+  /** Familia CSS para previsualizar la opción en el selector. */
+  readonly familia: string;
+}
+
+export interface OpcionFondo {
+  readonly id: string;
+  readonly nombre: string;
+  readonly clase: string;
+}
 
 /**
- * Estado global del tema visual. La clase del tema activo se inyecta en el
- * contenedor raíz (app.html) y las utilidades `ocean:*` de Tailwind
- * (definidas en styles.css) reaccionan a ella en todos los componentes.
+ * Estado global de personalización visual (paleta, fuente del título y
+ * fondo). Las clases activas se inyectan en el contenedor raíz (app.html)
+ * y redefinen las variables CSS que consumen los tokens de Tailwind
+ * (text-acento, bg-acento, font-script, ...) definidos en styles.css.
  */
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  readonly temaActual = signal<Tema>('ocean-blue');
+  readonly paletas: readonly OpcionPaleta[] = [
+    { id: 'oceano', nombre: 'Océano', clase: 'paleta-oceano', muestra: '#2563eb' },
+    { id: 'rosa', nombre: 'Rosa', clase: 'paleta-rosa', muestra: '#e11d48' },
+    { id: 'esmeralda', nombre: 'Esmeralda', clase: 'paleta-esmeralda', muestra: '#059669' },
+    { id: 'lavanda', nombre: 'Lavanda', clase: 'paleta-lavanda', muestra: '#7c3aed' },
+    { id: 'vino', nombre: 'Vino', clase: 'paleta-vino', muestra: '#991b1b' },
+    { id: 'dorado', nombre: 'Dorado', clase: 'paleta-dorado', muestra: '#b45309' },
+    { id: 'coral', nombre: 'Coral', clase: 'paleta-coral', muestra: '#ea580c' },
+    { id: 'turquesa', nombre: 'Turquesa', clase: 'paleta-turquesa', muestra: '#0d9488' },
+    { id: 'grafito', nombre: 'Grafito', clase: 'paleta-grafito', muestra: '#44403c' },
+    { id: 'fucsia', nombre: 'Fucsia', clase: 'paleta-fucsia', muestra: '#c026d3' },
+  ];
 
-  alternar(): void {
-    this.temaActual.update((tema) => (tema === 'ocean-blue' ? 'romantic-rose' : 'ocean-blue'));
-  }
+  readonly fuentes: readonly OpcionFuente[] = [
+    { id: 'great-vibes', nombre: 'Great Vibes', clase: 'fuente-great-vibes', familia: '"Great Vibes", cursive' },
+    { id: 'dancing', nombre: 'Dancing Script', clase: 'fuente-dancing', familia: '"Dancing Script", cursive' },
+    { id: 'parisienne', nombre: 'Parisienne', clase: 'fuente-parisienne', familia: '"Parisienne", cursive' },
+    { id: 'allura', nombre: 'Allura', clase: 'fuente-allura', familia: '"Allura", cursive' },
+    { id: 'sacramento', nombre: 'Sacramento', clase: 'fuente-sacramento', familia: '"Sacramento", cursive' },
+    { id: 'tangerine', nombre: 'Tangerine', clase: 'fuente-tangerine', familia: '"Tangerine", cursive' },
+    { id: 'alex-brush', nombre: 'Alex Brush', clase: 'fuente-alex-brush', familia: '"Alex Brush", cursive' },
+    { id: 'pinyon', nombre: 'Pinyon Script', clase: 'fuente-pinyon', familia: '"Pinyon Script", cursive' },
+    { id: 'italianno', nombre: 'Italianno', clase: 'fuente-italianno', familia: '"Italianno", cursive' },
+    { id: 'playfair', nombre: 'Playfair Display', clase: 'fuente-playfair', familia: '"Playfair Display", serif' },
+  ];
+
+  readonly fondos: readonly OpcionFondo[] = [
+    { id: 'claro', nombre: 'Claro', clase: 'fondo-claro' },
+    { id: 'blanco', nombre: 'Blanco', clase: 'fondo-blanco' },
+    { id: 'marfil', nombre: 'Marfil', clase: 'fondo-marfil' },
+    { id: 'degradado', nombre: 'Degradado', clase: 'fondo-degradado' },
+    { id: 'puntos', nombre: 'Puntos', clase: 'fondo-puntos' },
+    { id: 'lineas', nombre: 'Líneas', clase: 'fondo-lineas' },
+  ];
+
+  readonly paleta = signal<OpcionPaleta>(this.paletas[0]);
+  readonly fuente = signal<OpcionFuente>(this.fuentes[0]);
+  readonly fondo = signal<OpcionFondo>(this.fondos[0]);
+
+  /** Clases combinadas para el contenedor raíz. */
+  readonly clases = computed(
+    () => `${this.paleta().clase} ${this.fuente().clase} ${this.fondo().clase}`,
+  );
 }

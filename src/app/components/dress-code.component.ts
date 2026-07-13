@@ -7,7 +7,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
-      class="mx-auto max-w-md overflow-hidden rounded-3xl border border-white/60 bg-white/40 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
+      class="mx-auto max-w-md overflow-hidden rounded-3xl border border-white/60 bg-white/50 text-center shadow-xl shadow-neutro/50 backdrop-blur-md"
     >
       @if (!imagenFallida()) {
         <img
@@ -20,10 +20,10 @@ import { INVITATION_CONFIG } from '../invitation-config';
       }
 
       <div class="p-8">
-        <i class="pi pi-sparkles mb-4 text-3xl text-rose-500 ocean:text-blue-500" aria-hidden="true"></i>
+        <i class="pi pi-sparkles mb-4 text-3xl text-acento" aria-hidden="true"></i>
 
-        <h3 class="font-serif text-3xl text-stone-800 ocean:text-slate-900">{{ vestimenta.titulo }}</h3>
-        <p class="mt-2 text-sm font-light text-stone-600 ocean:text-slate-600">
+        <h3 class="font-serif text-3xl text-tinta">{{ vestimenta.titulo }}</h3>
+        <p class="mt-2 text-sm font-light text-tinta-suave">
           Colores sugeridos para nuestros invitados
         </p>
 
@@ -32,10 +32,10 @@ import { INVITATION_CONFIG } from '../invitation-config';
           @for (color of vestimenta.paletaSugerida; track color.nombre) {
             <div class="group flex flex-col items-center gap-2">
               <span
-                class="h-10 w-10 rounded-full border border-stone-200 shadow-md transition-transform duration-300 group-hover:scale-110 ocean:border-slate-200"
+                class="h-10 w-10 rounded-full border border-neutro shadow-md transition-transform duration-300 group-hover:scale-110"
                 [style.background-color]="color.hex"
               ></span>
-              <span class="text-[10px] font-light tracking-wide text-stone-500 ocean:text-slate-500">
+              <span class="text-[10px] font-light tracking-wide text-tinta-suave">
                 {{ color.nombre }}
               </span>
             </div>
@@ -44,7 +44,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
 
         <!-- Advertencia elegante: color reservado -->
         <div
-          class="mt-8 flex items-center gap-4 rounded-2xl border border-rose-200 bg-rose-50/70 p-4 text-left ocean:border-blue-200 ocean:bg-blue-50/70"
+          class="mt-8 flex items-center gap-4 rounded-2xl border border-acento-claro bg-acento-claro/30 p-4 text-left"
         >
           <span class="relative flex h-10 w-10 shrink-0 items-center justify-center">
             <span
@@ -58,7 +58,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
               <i class="pi pi-ban text-2xl opacity-80"></i>
             </span>
           </span>
-          <p class="text-sm leading-snug text-rose-700 italic ocean:text-blue-800">
+          <p class="text-sm leading-snug text-acento-fuerte italic">
             {{ vestimenta.advertencia }}
           </p>
         </div>

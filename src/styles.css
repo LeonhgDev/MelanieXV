@@ -1,16 +1,8 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
-/*
- * Variante de tema: las clases `ocean:*` se activan cuando el contenedor
- * raíz (app.html) tiene la clase .ocean-blue inyectada por el ThemeService.
- * El tema 'romantic-rose' corresponde a los estilos por defecto (rosa).
- */
-@custom-variant ocean (&:where(.ocean-blue, .ocean-blue *));
-
 @theme {
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-script: "Great Vibes", cursive;
   --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
 
   --animate-sound-wave: sound-wave 0.9s ease-in-out infinite;
@@ -26,12 +18,195 @@
   }
 }
 
+/*
+ * Tokens semánticos del tema. Las utilidades (text-acento, bg-acento,
+ * border-neutro, font-script, ...) apuntan a variables CSS que cada clase
+ * de paleta/fuente (inyectada por ThemeService en el contenedor raíz)
+ * redefine. Así, agregar una paleta nueva = un bloque de variables.
+ */
+@theme inline {
+  --font-script: var(--fuente-titulo, "Great Vibes"), cursive;
+
+  --color-acento: var(--tema-acento);
+  --color-acento-fuerte: var(--tema-acento-fuerte);
+  --color-acento-suave: var(--tema-acento-suave);
+  --color-acento-claro: var(--tema-acento-claro);
+  --color-tinta: var(--tema-tinta);
+  --color-tinta-suave: var(--tema-tinta-suave);
+  --color-neutro: var(--tema-neutro);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-stone-50 font-sans text-stone-800 antialiased;
+  @apply bg-white font-sans antialiased;
+}
+
+/* ---------- Paletas de color (10) ---------- */
+
+.paleta-rosa {
+  --tema-acento: #e11d48;
+  --tema-acento-fuerte: #be123c;
+  --tema-acento-suave: #fda4af;
+  --tema-acento-claro: #fecdd3;
+  --tema-tinta: #292524;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #fdf6f7;
+}
+
+.paleta-oceano {
+  --tema-acento: #2563eb;
+  --tema-acento-fuerte: #1d4ed8;
+  --tema-acento-suave: #93c5fd;
+  --tema-acento-claro: #bfdbfe;
+  --tema-tinta: #0f172a;
+  --tema-tinta-suave: #475569;
+  --tema-neutro: #e2e8f0;
+  --tema-fondo: #f8fafc;
+}
+
+.paleta-esmeralda {
+  --tema-acento: #059669;
+  --tema-acento-fuerte: #047857;
+  --tema-acento-suave: #6ee7b7;
+  --tema-acento-claro: #a7f3d0;
+  --tema-tinta: #292524;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #f2fbf7;
+}
+
+.paleta-lavanda {
+  --tema-acento: #7c3aed;
+  --tema-acento-fuerte: #6d28d9;
+  --tema-acento-suave: #c4b5fd;
+  --tema-acento-claro: #ddd6fe;
+  --tema-tinta: #0f172a;
+  --tema-tinta-suave: #475569;
+  --tema-neutro: #e2e8f0;
+  --tema-fondo: #f8f7fd;
+}
+
+.paleta-vino {
+  --tema-acento: #991b1b;
+  --tema-acento-fuerte: #7f1d1d;
+  --tema-acento-suave: #fca5a5;
+  --tema-acento-claro: #fecaca;
+  --tema-tinta: #292524;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #fcf7f5;
+}
+
+.paleta-dorado {
+  --tema-acento: #b45309;
+  --tema-acento-fuerte: #92400e;
+  --tema-acento-suave: #fcd34d;
+  --tema-acento-claro: #fde68a;
+  --tema-tinta: #292524;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #fdfaf1;
+}
+
+.paleta-coral {
+  --tema-acento: #ea580c;
+  --tema-acento-fuerte: #c2410c;
+  --tema-acento-suave: #fdba74;
+  --tema-acento-claro: #fed7aa;
+  --tema-tinta: #292524;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #fdf8f3;
+}
+
+.paleta-turquesa {
+  --tema-acento: #0d9488;
+  --tema-acento-fuerte: #0f766e;
+  --tema-acento-suave: #5eead4;
+  --tema-acento-claro: #99f6e4;
+  --tema-tinta: #0f172a;
+  --tema-tinta-suave: #475569;
+  --tema-neutro: #e2e8f0;
+  --tema-fondo: #f3fbfa;
+}
+
+.paleta-grafito {
+  --tema-acento: #44403c;
+  --tema-acento-fuerte: #292524;
+  --tema-acento-suave: #a8a29e;
+  --tema-acento-claro: #d6d3d1;
+  --tema-tinta: #1c1917;
+  --tema-tinta-suave: #57534e;
+  --tema-neutro: #e7e5e4;
+  --tema-fondo: #fafaf9;
+}
+
+.paleta-fucsia {
+  --tema-acento: #c026d3;
+  --tema-acento-fuerte: #a21caf;
+  --tema-acento-suave: #f0abfc;
+  --tema-acento-claro: #f5d0fe;
+  --tema-tinta: #0f172a;
+  --tema-tinta-suave: #475569;
+  --tema-neutro: #e2e8f0;
+  --tema-fondo: #fdf6fe;
+}
+
+/* ---------- Fuentes del título (10) ---------- */
+
+.fuente-great-vibes { --fuente-titulo: "Great Vibes"; }
+.fuente-dancing { --fuente-titulo: "Dancing Script"; }
+.fuente-parisienne { --fuente-titulo: "Parisienne"; }
+.fuente-allura { --fuente-titulo: "Allura"; }
+.fuente-sacramento { --fuente-titulo: "Sacramento"; }
+.fuente-tangerine { --fuente-titulo: "Tangerine"; }
+.fuente-alex-brush { --fuente-titulo: "Alex Brush"; }
+.fuente-pinyon { --fuente-titulo: "Pinyon Script"; }
+.fuente-italianno { --fuente-titulo: "Italianno"; }
+.fuente-playfair { --fuente-titulo: "Playfair Display"; }
+
+/* ---------- Fondos de página (6) ---------- */
+
+.fondo-claro {
+  background-color: var(--tema-fondo);
+}
+
+.fondo-blanco {
+  background-color: #ffffff;
+}
+
+.fondo-marfil {
+  background-color: #faf6ee;
+}
+
+.fondo-degradado {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--tema-acento-claro) 55%, white),
+    var(--tema-fondo) 45%
+  );
+}
+
+.fondo-puntos {
+  background-color: var(--tema-fondo);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--tema-acento) 16%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+}
+
+.fondo-lineas {
+  background-color: var(--tema-fondo);
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--tema-acento) 5%, transparent) 0 2px,
+    transparent 2px 16px
+  );
 }
 
 /* Animación de entrada: la directiva RevealOnScroll agrega .is-visible */

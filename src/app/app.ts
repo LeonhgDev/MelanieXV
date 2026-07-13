@@ -32,5 +32,5 @@ import { INVITATION_CONFIG } from './invitation-config';
 })
 export class App {
   protected readonly config = INVITATION_CONFIG;
-  protected readonly temaActual = inject(ThemeService).temaActual;
+  protected readonly clasesTema = inject(ThemeService).clases;
 }

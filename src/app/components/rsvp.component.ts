@@ -13,19 +13,19 @@ import { INVITATION_CONFIG } from '../invitation-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
-      class="mx-auto max-w-md rounded-3xl border border-white/60 bg-white/40 p-8 shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
+      class="mx-auto max-w-md rounded-3xl border border-white/60 bg-white/50 p-8 shadow-xl shadow-neutro/50 backdrop-blur-md"
     >
       <div class="text-center">
-        <i class="pi pi-envelope mb-4 text-3xl text-rose-500 ocean:text-blue-500" aria-hidden="true"></i>
-        <h3 class="font-serif text-2xl text-stone-800 ocean:text-slate-900">Confirma tu asistencia</h3>
-        <p class="mt-2 text-sm font-light text-stone-600 ocean:text-slate-600">
+        <i class="pi pi-envelope mb-4 text-3xl text-acento" aria-hidden="true"></i>
+        <h3 class="font-serif text-2xl text-tinta">Confirma tu asistencia</h3>
+        <p class="mt-2 text-sm font-light text-tinta-suave">
           Por favor confirma antes del gran día. ¡Queremos celebrar contigo!
         </p>
       </div>
 
       <form class="mt-6 flex flex-col gap-4" (submit)="$event.preventDefault(); confirmar()">
         <div class="flex flex-col gap-1">
-          <label for="nombre" class="text-xs font-medium tracking-wide text-stone-600 uppercase ocean:text-slate-600">
+          <label for="nombre" class="text-xs font-medium tracking-wide text-tinta-suave uppercase">
             Tu nombre completo
           </label>
           <input
@@ -42,7 +42,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
         </div>
 
         <div class="flex flex-col gap-1">
-          <label for="pases" class="text-xs font-medium tracking-wide text-stone-600 uppercase ocean:text-slate-600">
+          <label for="pases" class="text-xs font-medium tracking-wide text-tinta-suave uppercase">
             Número de lugares
           </label>
           <p-select
@@ -70,9 +70,9 @@ import { INVITATION_CONFIG } from '../invitation-config';
       </form>
 
       <div class="my-6 flex items-center gap-3">
-        <span class="h-px flex-1 bg-stone-200 ocean:bg-slate-200"></span>
-        <span class="text-xs font-light text-stone-400 ocean:text-slate-400">o</span>
-        <span class="h-px flex-1 bg-stone-200 ocean:bg-slate-200"></span>
+        <span class="h-px flex-1 bg-neutro"></span>
+        <span class="text-xs font-light text-tinta-suave">o</span>
+        <span class="h-px flex-1 bg-neutro"></span>
       </div>
 
       <p-button

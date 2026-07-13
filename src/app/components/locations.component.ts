@@ -23,7 +23,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
       />
 
       <div
-        class="w-full overflow-hidden rounded-3xl border border-white/60 bg-white/40 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
+        class="w-full overflow-hidden rounded-3xl border border-white/60 bg-white/50 text-center shadow-xl shadow-neutro/50 backdrop-blur-md"
       >
         @if (!imagenFallida()) {
           <img
@@ -37,21 +37,19 @@ type ClaveUbicacion = 'misa' | 'recepcion';
 
         <div class="p-8">
           <i
-            class="pi mb-4 text-3xl text-rose-500 ocean:text-blue-500"
+            class="pi mb-4 text-3xl text-acento"
             [class.pi-heart]="seleccion() === 'misa'"
             [class.pi-star]="seleccion() === 'recepcion'"
             aria-hidden="true"
           ></i>
 
-          <h3 class="font-serif text-2xl text-stone-800 ocean:text-slate-900">
-            {{ ubicacion().nombre }}
-          </h3>
+          <h3 class="font-serif text-2xl text-tinta">{{ ubicacion().nombre }}</h3>
 
-          <p class="mt-2 text-lg font-medium text-rose-600 ocean:text-blue-600">
+          <p class="mt-2 text-lg font-medium text-acento">
             <i class="pi pi-clock mr-1 text-sm" aria-hidden="true"></i>{{ ubicacion().hora }}
           </p>
 
-          <p class="mt-3 text-sm leading-relaxed font-light text-stone-600 ocean:text-slate-600">
+          <p class="mt-3 text-sm leading-relaxed font-light text-tinta-suave">
             {{ ubicacion().direccion }}
           </p>
 
@@ -60,7 +58,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
               [href]="ubicacion().mapsUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-rose-200 transition-all duration-300 hover:bg-rose-600 hover:shadow-xl ocean:bg-blue-600 ocean:shadow-blue-200 ocean:hover:bg-blue-700"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-acento px-6 py-3 text-sm font-medium text-white shadow-lg shadow-acento-claro transition-all duration-300 hover:bg-acento-fuerte hover:shadow-xl"
             >
               <i class="pi pi-map-marker" aria-hidden="true"></i>
               Google Maps
@@ -69,7 +67,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
               [href]="wazeUrl()"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/60 px-6 py-3 text-sm font-medium text-stone-700 transition-all duration-300 hover:border-rose-300 hover:text-rose-600 ocean:border-slate-300 ocean:text-slate-700 ocean:hover:border-blue-300 ocean:hover:text-blue-600"
+              class="inline-flex items-center justify-center gap-2 rounded-full border border-neutro bg-white/60 px-6 py-3 text-sm font-medium text-tinta-suave transition-all duration-300 hover:border-acento-suave hover:text-acento"
             >
               <i class="pi pi-compass" aria-hidden="true"></i>
               Waze
