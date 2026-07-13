@@ -31,7 +31,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
             [alt]="ubicacion().nombre"
             loading="lazy"
             (error)="imagenFallida.set(true)"
-            class="h-48 w-full object-cover"
+            class="h-auto w-full"
           />
         }
 
