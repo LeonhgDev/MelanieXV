@@ -94,10 +94,10 @@ export class ThemeService {
     { id: 'vino', nombre: 'Vino', css: '#722f37' },
   ];
 
-  /** Valores por defecto: paleta Océano, fuente Sacramento, fondo Claro. */
+  /** Valores por defecto: paleta Océano, fuente Parisienne, fondo Aurora. */
   readonly paleta = signal<OpcionPaleta>(this.buscar(this.paletas, 'oceano'));
-  readonly fuente = signal<OpcionFuente>(this.buscar(this.fuentes, 'sacramento'));
-  readonly fondo = signal<OpcionFondo>(this.buscar(this.fondos, 'claro'));
+  readonly fuente = signal<OpcionFuente>(this.buscar(this.fuentes, 'parisienne'));
+  readonly fondo = signal<OpcionFondo>(this.buscar(this.fondos, 'aurora'));
   readonly fuenteNombres = signal<OpcionFuente>(this.buscar(this.fuentesNombres, 'serif'));
   readonly colorNombres = signal<OpcionColorTexto>(this.buscar(this.coloresNombres, 'tinta'));
 
