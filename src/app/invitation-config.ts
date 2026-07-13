@@ -13,6 +13,17 @@ export interface Ubicacion {
   readonly imagenUrl: string;
 }
 
+export interface GrupoFamiliar {
+  readonly titulo: string;
+  readonly nombres: readonly string[];
+}
+
+export interface Familia {
+  readonly grupos: readonly GrupoFamiliar[];
+  /** Frase que cierra la sección familiar. */
+  readonly fraseCierre: string;
+}
+
 export interface MesaRegalos {
   readonly tienda: string;
   readonly codigo: string;
@@ -38,6 +49,7 @@ export interface InvitationConfig {
   readonly codigoPaisWhatsapp: string;
   readonly whatsappConfirmacion: string;
   readonly whatsappFelicitaciones: string;
+  readonly familia: Familia;
   readonly mesaRegalos: MesaRegalos;
   readonly pasesMaximosPorInvitado: number;
   readonly ubicaciones: {
@@ -57,6 +69,13 @@ export const INVITATION_CONFIG: InvitationConfig = {
   codigoPaisWhatsapp: '52',
   whatsappConfirmacion: '5545329137',
   whatsappFelicitaciones: '5591069496',
+  familia: {
+    grupos: [
+      { titulo: 'Mis padres', nombres: ['Alma Jiménez', 'Gume León'] },
+      { titulo: 'Mis padrinos', nombres: ['Blanca Jiménez', 'Gustavo Novas'] },
+    ],
+    fraseCierre: 'Acompáñanos a celebrar.',
+  },
   mesaRegalos: {
     tienda: 'Liverpool',
     codigo: '51902017',
