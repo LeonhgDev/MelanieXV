@@ -15,7 +15,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
           alt="Ilustración del código de vestimenta"
           loading="lazy"
           (error)="imagenFallida.set(true)"
-          class="h-48 w-full object-cover"
+          class="h-auto w-full"
         />
       }
 
