@@ -101,7 +101,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
   },
   codigoVestimenta: {
     titulo: 'Formal',
-    advertencia: 'El color Azul está reservado exclusivamente para la quinceañera',
+    advertencia: 'El color Azul en todas sus tonalidades está reservado exclusivamente para la quinceañera',
     paletaSugerida: [
       { nombre: 'Marfil', hex: '#f5f0e8' },
       { nombre: 'Piedra', hex: '#a8a29e' },
