@@ -15,7 +15,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
       <p-selectButton
         [options]="opciones"
         [ngModel]="seleccion()"
-        (ngModelChange)="seleccion.set($event)"
+        (ngModelChange)="cambiarSeleccion($event)"
         [allowEmpty]="false"
         optionLabel="etiqueta"
         optionValue="valor"
@@ -23,44 +23,58 @@ type ClaveUbicacion = 'misa' | 'recepcion';
       />
 
       <div
-        class="w-full rounded-3xl border border-white/60 bg-white/40 p-8 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md"
+        class="w-full overflow-hidden rounded-3xl border border-white/60 bg-white/40 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
       >
-        <i
-          class="pi mb-4 text-3xl text-rose-500"
-          [class.pi-heart]="seleccion() === 'misa'"
-          [class.pi-star]="seleccion() === 'recepcion'"
-          aria-hidden="true"
-        ></i>
+        @if (!imagenFallida()) {
+          <img
+            [src]="ubicacion().imagenUrl"
+            [alt]="ubicacion().nombre"
+            loading="lazy"
+            (error)="imagenFallida.set(true)"
+            class="h-48 w-full object-cover"
+          />
+        }
 
-        <h3 class="font-serif text-2xl text-stone-800">{{ ubicacion().nombre }}</h3>
+        <div class="p-8">
+          <i
+            class="pi mb-4 text-3xl text-rose-500 ocean:text-blue-500"
+            [class.pi-heart]="seleccion() === 'misa'"
+            [class.pi-star]="seleccion() === 'recepcion'"
+            aria-hidden="true"
+          ></i>
 
-        <p class="mt-2 text-lg font-medium text-rose-600">
-          <i class="pi pi-clock mr-1 text-sm" aria-hidden="true"></i>{{ ubicacion().hora }}
-        </p>
+          <h3 class="font-serif text-2xl text-stone-800 ocean:text-slate-900">
+            {{ ubicacion().nombre }}
+          </h3>
 
-        <p class="mt-3 text-sm leading-relaxed font-light text-stone-600">
-          {{ ubicacion().direccion }}
-        </p>
+          <p class="mt-2 text-lg font-medium text-rose-600 ocean:text-blue-600">
+            <i class="pi pi-clock mr-1 text-sm" aria-hidden="true"></i>{{ ubicacion().hora }}
+          </p>
 
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <a
-            [href]="ubicacion().mapsUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-rose-200 transition-all duration-300 hover:bg-rose-600 hover:shadow-xl"
-          >
-            <i class="pi pi-map-marker" aria-hidden="true"></i>
-            Google Maps
-          </a>
-          <a
-            [href]="wazeUrl()"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/60 px-6 py-3 text-sm font-medium text-stone-700 transition-all duration-300 hover:border-rose-300 hover:text-rose-600"
-          >
-            <i class="pi pi-compass" aria-hidden="true"></i>
-            Waze
-          </a>
+          <p class="mt-3 text-sm leading-relaxed font-light text-stone-600 ocean:text-slate-600">
+            {{ ubicacion().direccion }}
+          </p>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <a
+              [href]="ubicacion().mapsUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-rose-200 transition-all duration-300 hover:bg-rose-600 hover:shadow-xl ocean:bg-blue-600 ocean:shadow-blue-200 ocean:hover:bg-blue-700"
+            >
+              <i class="pi pi-map-marker" aria-hidden="true"></i>
+              Google Maps
+            </a>
+            <a
+              [href]="wazeUrl()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/60 px-6 py-3 text-sm font-medium text-stone-700 transition-all duration-300 hover:border-rose-300 hover:text-rose-600 ocean:border-slate-300 ocean:text-slate-700 ocean:hover:border-blue-300 ocean:hover:text-blue-600"
+            >
+              <i class="pi pi-compass" aria-hidden="true"></i>
+              Waze
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -76,6 +90,9 @@ export class LocationsComponent {
 
   protected readonly seleccion = signal<ClaveUbicacion>('misa');
 
+  /** Oculta la imagen si el archivo aún no existe en src/assets/img/. */
+  protected readonly imagenFallida = signal(false);
+
   protected readonly ubicacion = computed<Ubicacion>(
     () => this.config.ubicaciones[this.seleccion()],
   );
@@ -84,4 +101,9 @@ export class LocationsComponent {
   protected readonly wazeUrl = computed(
     () => `https://waze.com/ul?q=${encodeURIComponent(this.ubicacion().direccion)}&navigate=yes`,
   );
+
+  protected cambiarSeleccion(valor: ClaveUbicacion): void {
+    this.seleccion.set(valor);
+    this.imagenFallida.set(false);
+  }
 }

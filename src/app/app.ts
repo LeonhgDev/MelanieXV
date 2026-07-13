@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToastModule } from 'primeng/toast';
 import { HeroComponent } from './components/hero.component';
 import { AudioPlayerComponent } from './components/audio-player.component';
@@ -7,7 +7,9 @@ import { LocationsComponent } from './components/locations.component';
 import { DressCodeComponent } from './components/dress-code.component';
 import { GiftsComponent } from './components/gifts.component';
 import { RsvpComponent } from './components/rsvp.component';
+import { ThemeTogglerComponent } from './components/theme-toggler.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
+import { ThemeService } from './services/theme.service';
 import { INVITATION_CONFIG } from './invitation-config';
 
 @Component({
@@ -21,6 +23,7 @@ import { INVITATION_CONFIG } from './invitation-config';
     DressCodeComponent,
     GiftsComponent,
     RsvpComponent,
+    ThemeTogglerComponent,
     RevealOnScrollDirective,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,4 +32,5 @@ import { INVITATION_CONFIG } from './invitation-config';
 })
 export class App {
   protected readonly config = INVITATION_CONFIG;
+  protected readonly temaActual = inject(ThemeService).temaActual;
 }

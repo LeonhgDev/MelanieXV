@@ -24,13 +24,20 @@ interface TiempoRestante {
     <div class="mx-auto grid max-w-md grid-cols-4 gap-3 sm:gap-4">
       @for (bloque of bloques(); track bloque.etiqueta) {
         <div
-          class="flex flex-col items-center justify-center rounded-3xl border border-white/60 bg-white/40 py-4 shadow-xl shadow-stone-200/50 backdrop-blur-md"
+          class="flex flex-col items-center justify-center rounded-3xl border border-white/60 bg-white/40 py-4 shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
           [class.animate-pulse]="bloque.pulso"
         >
-          <span class="font-serif text-3xl font-semibold text-rose-600 tabular-nums sm:text-4xl">
+          <span
+            class="font-serif text-3xl font-semibold tabular-nums sm:text-4xl"
+            [class]="
+              bloque.pulso
+                ? 'text-rose-500 ocean:text-blue-500'
+                : 'text-rose-600 ocean:text-blue-600'
+            "
+          >
             {{ bloque.valor }}
           </span>
-          <span class="mt-1 text-[10px] font-light tracking-widest text-stone-500 uppercase sm:text-xs">
+          <span class="mt-1 text-[10px] font-light tracking-widest text-stone-500 uppercase ocean:text-slate-500 sm:text-xs">
             {{ bloque.etiqueta }}
           </span>
         </div>
@@ -38,7 +45,9 @@ interface TiempoRestante {
     </div>
 
     @if (restante().finalizado) {
-      <p class="mt-6 text-center font-serif text-xl text-rose-600 italic">¡El gran día llegó!</p>
+      <p class="mt-6 text-center font-serif text-xl text-rose-600 italic ocean:text-blue-600">
+        ¡El gran día llegó!
+      </p>
     }
   `,
 })

@@ -8,28 +8,32 @@ import { INVITATION_CONFIG } from '../invitation-config';
   template: `
     <section class="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
       <!-- Fondo: degradado elegante + imagen opcional (public/hero.jpg) -->
-      <div class="absolute inset-0 bg-gradient-to-b from-rose-100 via-stone-100 to-stone-50"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-rose-100 via-stone-100 to-stone-50 ocean:from-blue-100 ocean:via-slate-100 ocean:to-slate-50"
+      ></div>
       <div
         class="absolute inset-0 bg-cover bg-center"
         [style.background-image]="'url(' + config.heroImagenUrl + ')'"
       ></div>
       <!-- Overlay translúcido -->
-      <div class="absolute inset-0 bg-stone-50/40 backdrop-blur-[2px]"></div>
+      <div class="absolute inset-0 bg-stone-50/40 backdrop-blur-[2px] ocean:bg-slate-50/40"></div>
 
       <div class="relative flex flex-col items-center gap-6">
-        <p class="text-sm font-light tracking-[0.4em] text-stone-600 uppercase">Mis XV Años</p>
+        <p class="text-sm font-light tracking-[0.4em] text-stone-600 uppercase ocean:text-slate-600">
+          Mis XV Años
+        </p>
 
-        <h1 class="font-script text-7xl text-rose-600 drop-shadow-sm sm:text-8xl md:text-9xl">
+        <h1 class="font-script text-7xl text-rose-600 drop-shadow-sm ocean:text-blue-700 sm:text-8xl md:text-9xl">
           {{ config.nombreQuinceanera }}
         </h1>
 
-        <div class="flex items-center gap-4 text-stone-500">
-          <span class="h-px w-12 bg-stone-400"></span>
+        <div class="flex items-center gap-4 text-stone-500 ocean:text-slate-600">
+          <span class="h-px w-12 bg-stone-400 ocean:bg-slate-400"></span>
           <p class="font-serif text-xl tracking-wide capitalize">{{ fechaLegible }}</p>
-          <span class="h-px w-12 bg-stone-400"></span>
+          <span class="h-px w-12 bg-stone-400 ocean:bg-slate-400"></span>
         </div>
 
-        <p class="max-w-xs font-serif text-lg text-stone-600 italic">
+        <p class="max-w-xs font-serif text-lg text-stone-600 italic ocean:text-slate-600">
           {{ config.fraseBienvenida }}
         </p>
       </div>
@@ -38,7 +42,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
       <a
         href="#contenido"
         aria-label="Ver la invitación"
-        class="absolute bottom-8 flex h-12 w-12 animate-bounce items-center justify-center rounded-full border border-white/60 bg-white/40 text-rose-600 shadow-xl shadow-stone-200/50 backdrop-blur-md transition-colors duration-300 hover:bg-rose-500 hover:text-white"
+        class="absolute bottom-8 flex h-12 w-12 animate-bounce items-center justify-center rounded-full border border-white/60 bg-white/40 text-rose-600 shadow-xl shadow-stone-200/50 backdrop-blur-md transition-colors duration-300 hover:bg-rose-500 hover:text-white ocean:border-slate-200/60 ocean:bg-white/50 ocean:text-blue-600 ocean:shadow-slate-200/50 ocean:hover:bg-blue-600 ocean:hover:text-white"
       >
         <i class="pi pi-angle-down text-xl" aria-hidden="true"></i>
       </a>

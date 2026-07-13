@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
+/*
+ * Variante de tema: las clases `ocean:*` se activan cuando el contenedor
+ * raíz (app.html) tiene la clase .ocean-blue inyectada por el ThemeService.
+ * El tema 'romantic-rose' corresponde a los estilos por defecto (rosa).
+ */
+@custom-variant ocean (&:where(.ocean-blue, .ocean-blue *));
+
 @theme {
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-script: "Great Vibes", cursive;

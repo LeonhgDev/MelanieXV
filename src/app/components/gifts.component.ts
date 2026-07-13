@@ -8,25 +8,25 @@ import { INVITATION_CONFIG } from '../invitation-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
-      class="mx-auto max-w-md rounded-3xl border border-white/60 bg-white/40 p-8 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md"
+      class="mx-auto max-w-md rounded-3xl border border-white/60 bg-white/40 p-8 text-center shadow-xl shadow-stone-200/50 backdrop-blur-md ocean:border-slate-200/60 ocean:bg-white/50 ocean:shadow-slate-200/50"
     >
-      <i class="pi pi-gift mb-4 text-4xl text-rose-500" aria-hidden="true"></i>
+      <i class="pi pi-gift mb-4 text-4xl text-rose-500 ocean:text-blue-500" aria-hidden="true"></i>
 
-      <h3 class="font-serif text-2xl text-stone-800">Mesa de Regalos</h3>
-      <p class="mt-2 text-sm font-light text-stone-600">
+      <h3 class="font-serif text-2xl text-stone-800 ocean:text-slate-900">Mesa de Regalos</h3>
+      <p class="mt-2 text-sm font-light text-stone-600 ocean:text-slate-600">
         Tu presencia es nuestro mejor regalo, pero si deseas obsequiarnos algo, contamos con mesa
         de regalos en <span class="font-medium">{{ regalos.tienda }}</span>.
       </p>
 
       <!-- Código del evento con copiado rápido -->
       <div
-        class="mt-6 flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/60 px-5 py-3"
+        class="mt-6 flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/60 px-5 py-3 ocean:border-slate-200"
       >
         <div class="text-left">
-          <p class="text-[10px] font-light tracking-widest text-stone-500 uppercase">
+          <p class="text-[10px] font-light tracking-widest text-stone-500 uppercase ocean:text-slate-500">
             Número de evento
           </p>
-          <p class="font-serif text-xl font-semibold tracking-wider text-stone-800 tabular-nums">
+          <p class="font-serif text-xl font-semibold tracking-wider text-stone-800 tabular-nums ocean:text-slate-900">
             {{ regalos.codigo }}
           </p>
         </div>
@@ -34,7 +34,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
           type="button"
           (click)="copiarCodigo()"
           aria-label="Copiar número de evento"
-          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-rose-500 text-white shadow-lg shadow-rose-200 transition-all duration-300 hover:bg-rose-600 active:scale-95"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-rose-500 text-white shadow-lg shadow-rose-200 transition-all duration-300 hover:bg-rose-600 active:scale-95 ocean:bg-blue-600 ocean:shadow-blue-200 ocean:hover:bg-blue-700"
         >
           <i class="pi pi-copy" aria-hidden="true"></i>
         </button>
@@ -44,7 +44,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
         [href]="regalos.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-rose-300 bg-white/60 px-6 py-3 text-sm font-medium text-rose-600 transition-all duration-300 hover:bg-rose-500 hover:text-white"
+        class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-rose-300 bg-white/60 px-6 py-3 text-sm font-medium text-rose-600 transition-all duration-300 hover:bg-rose-500 hover:text-white ocean:border-blue-300 ocean:text-blue-600 ocean:hover:bg-blue-600 ocean:hover:text-white"
       >
         <i class="pi pi-external-link" aria-hidden="true"></i>
         Ver mesa de regalos
