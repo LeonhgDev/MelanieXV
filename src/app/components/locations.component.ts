@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { INVITATION_CONFIG, Ubicacion } from '../invitation-config';
 
 type ClaveUbicacion = 'misa' | 'recepcion';
@@ -8,19 +6,33 @@ type ClaveUbicacion = 'misa' | 'recepcion';
 @Component({
   selector: 'app-locations',
   standalone: true,
-  imports: [FormsModule, SelectButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="mx-auto flex max-w-md flex-col items-center gap-6">
-      <p-selectButton
-        [options]="opciones"
-        [ngModel]="seleccion()"
-        (ngModelChange)="cambiarSeleccion($event)"
-        [allowEmpty]="false"
-        optionLabel="etiqueta"
-        optionValue="valor"
-        size="small"
-      />
+      <!-- Selector tipo píldora: la opción activa se rellena con el acento -->
+      <div
+        class="flex gap-1.5 rounded-full border border-white/60 bg-white/50 p-1.5 shadow-lg shadow-neutro/40 backdrop-blur-md"
+        role="tablist"
+        aria-label="Elige la ubicación"
+      >
+        @for (opcion of opciones; track opcion.valor) {
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="seleccion() === opcion.valor"
+            (click)="cambiarSeleccion(opcion.valor)"
+            class="inline-flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 active:scale-95"
+            [class]="
+              seleccion() === opcion.valor
+                ? 'bg-acento text-white shadow-md shadow-acento-claro'
+                : 'text-tinta-suave hover:bg-acento-claro/50 hover:text-acento'
+            "
+          >
+            <i class="pi text-xs" [class]="opcion.icono" aria-hidden="true"></i>
+            {{ opcion.etiqueta }}
+          </button>
+        }
+      </div>
 
       <div
         class="w-full overflow-hidden rounded-3xl border border-white/60 bg-white/50 text-center shadow-xl shadow-neutro/50 backdrop-blur-md"
@@ -81,9 +93,9 @@ type ClaveUbicacion = 'misa' | 'recepcion';
 export class LocationsComponent {
   private readonly config = INVITATION_CONFIG;
 
-  protected readonly opciones: { etiqueta: string; valor: ClaveUbicacion }[] = [
-    { etiqueta: 'Ceremonia Religiosa', valor: 'misa' },
-    { etiqueta: 'Recepción', valor: 'recepcion' },
+  protected readonly opciones: { etiqueta: string; valor: ClaveUbicacion; icono: string }[] = [
+    { etiqueta: 'Ceremonia Religiosa', valor: 'misa', icono: 'pi-heart' },
+    { etiqueta: 'Recepción', valor: 'recepcion', icono: 'pi-star' },
   ];
 
   protected readonly seleccion = signal<ClaveUbicacion>('misa');
