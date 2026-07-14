@@ -41,23 +41,25 @@ import { INVITATION_CONFIG } from '../invitation-config';
           />
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label for="pases" class="text-xs font-medium tracking-wide text-tinta-suave uppercase">
-            Número de lugares
-          </label>
-          <p-select
-            inputId="pases"
-            name="pases"
-            [options]="opcionesPases"
-            optionLabel="etiqueta"
-            optionValue="valor"
-            placeholder="Selecciona tus pases"
-            [ngModel]="pases()"
-            (ngModelChange)="pases.set($event)"
-            styleClass="w-full"
-            appendTo="body"
-          />
-        </div>
+        @if (seleccionPasesHabilitada) {
+          <div class="flex flex-col gap-1">
+            <label for="pases" class="text-xs font-medium tracking-wide text-tinta-suave uppercase">
+              Número de lugares
+            </label>
+            <p-select
+              inputId="pases"
+              name="pases"
+              [options]="opcionesPases"
+              optionLabel="etiqueta"
+              optionValue="valor"
+              placeholder="Selecciona tus pases"
+              [ngModel]="pases()"
+              (ngModelChange)="pases.set($event)"
+              styleClass="w-full"
+              appendTo="body"
+            />
+          </div>
+        }
 
         <p-button
           type="submit"
@@ -92,6 +94,7 @@ export class RsvpComponent {
 
   protected readonly nombre = signal('');
   protected readonly pases = signal<number | null>(null);
+  protected readonly seleccionPasesHabilitada = this.config.permitirSeleccionPases;
 
   protected readonly opcionesPases = Array.from(
     { length: this.config.pasesMaximosPorInvitado },
@@ -102,7 +105,9 @@ export class RsvpComponent {
   );
 
   protected readonly formularioValido = computed(
-    () => this.nombre().trim().length > 2 && this.pases() !== null,
+    () =>
+      this.nombre().trim().length > 2 &&
+      (!this.seleccionPasesHabilitada || this.pases() !== null),
   );
 
   protected confirmar(): void {
@@ -110,16 +115,20 @@ export class RsvpComponent {
       this.messageService.add({
         severity: 'warn',
         summary: 'Faltan datos',
-        detail: 'Escribe tu nombre y selecciona el número de lugares.',
+        detail: this.seleccionPasesHabilitada
+          ? 'Escribe tu nombre y selecciona el número de lugares.'
+          : 'Escribe tu nombre completo.',
         life: 3000,
       });
       return;
     }
 
-    const mensaje =
+    let mensaje =
       `¡Hola! Confirmo mi asistencia a los *XV Años de ${this.config.nombreQuinceanera}*.\n` +
-      `*Nombre:* ${this.nombre().trim()}\n` +
-      `*Lugares confirmados:* ${this.pases()}`;
+      `*Nombre:* ${this.nombre().trim()}`;
+    if (this.seleccionPasesHabilitada) {
+      mensaje += `\n*Lugares confirmados:* ${this.pases()}`;
+    }
 
     this.abrirWhatsapp(this.config.whatsappConfirmacion, mensaje);
   }

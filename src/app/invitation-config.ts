@@ -52,6 +52,12 @@ export interface InvitationConfig {
   readonly familia: Familia;
   readonly mesaRegalos: MesaRegalos;
   readonly pasesMaximosPorInvitado: number;
+  /**
+   * Si es false, el formulario de confirmación no pide número de lugares
+   * (y el mensaje de WhatsApp lo omite). Para restringir pases más adelante:
+   * poner en true y ajustar pasesMaximosPorInvitado.
+   */
+  readonly permitirSeleccionPases: boolean;
   readonly ubicaciones: {
     readonly misa: Ubicacion;
     readonly recepcion: Ubicacion;
@@ -82,6 +88,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
     url: 'https://mesaderegalos.liverpool.com.mx/milistaderegalos/51902017',
   },
   pasesMaximosPorInvitado: 6,
+  permitirSeleccionPases: false,
   ubicaciones: {
     misa: {
       nombre: 'Parroquia Nuestra Señora Aparecida del Brasil',
@@ -93,7 +100,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
     },
     recepcion: {
       nombre: 'Salón de Fiestas Portofino',
-      hora: '20:30 hrs',
+      hora: '19:45 hrs',
       direccion: 'Calle Ote. 172 21, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX',
       mapsUrl: 'https://maps.app.goo.gl/PJ3cFyz1iSYEQXUv6',
       imagenUrl: 'assets/img/Recepcion.png',
