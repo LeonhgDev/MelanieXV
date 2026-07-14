@@ -46,3 +46,6 @@ Thumbs.db
 .claude/settings.local.json
 .vercel
 .env*
+
+# Notas de trabajo locales
+Solicitud de cambios.txt
