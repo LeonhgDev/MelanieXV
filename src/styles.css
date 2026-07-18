@@ -16,6 +16,41 @@
       transform: scaleY(1);
     }
   }
+
+  /* Doble latido (como un corazón) para llamar la atención sobre el play */
+  --animate-latido: latido 2.2s ease-in-out infinite;
+
+  @keyframes latido {
+    0%,
+    45%,
+    100% {
+      transform: scale(1);
+    }
+    12% {
+      transform: scale(1.14);
+    }
+    24% {
+      transform: scale(1);
+    }
+    34% {
+      transform: scale(1.14);
+    }
+  }
+
+  /* Anillo que se expande y desvanece detrás del botón */
+  --animate-halo: halo 2.2s ease-out infinite;
+
+  @keyframes halo {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    70%,
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
 }
 
 /*
