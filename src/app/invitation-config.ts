@@ -63,7 +63,7 @@ export interface InvitationConfig {
     readonly recepcion: Ubicacion;
   };
   readonly codigoVestimenta: CodigoVestimenta;
-  /** Archivos colocados en la carpeta public/ */
+  /** Rutas servidas por la app (src/assets/... o public/) */
   readonly musicaUrl: string;
   readonly heroImagenUrl: string;
 }
@@ -120,6 +120,6 @@ export const INVITATION_CONFIG: InvitationConfig = {
     colorReservado: { nombre: 'Azul', hex: '#1e40af' },
     imagenUrl: 'assets/img/CodigoVestimenta.png',
   },
-  musicaUrl: 'cancion.mp3',
+  musicaUrl: 'assets/sounds/BirdsOfFeather.mp3',
   heroImagenUrl: 'hero.jpg',
 };
