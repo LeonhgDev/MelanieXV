@@ -16,6 +16,14 @@ import { INVITATION_CONFIG } from '../invitation-config';
       <!-- Overlay translúcido -->
       <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
 
+      <!-- Marco floral superior: se desvanece en su borde inferior para fundirse con el fondo -->
+      <img
+        src="assets/img/FondoSuperiorBlanco.png"
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 top-0 max-h-[40svh] w-full object-cover object-top select-none [mask-image:linear-gradient(to_bottom,black_65%,transparent)]"
+      />
+
       <div class="relative flex flex-col items-center gap-6">
         <p class="text-sm font-light tracking-[0.4em] text-tinta-suave uppercase">Mis XV Años</p>
 
