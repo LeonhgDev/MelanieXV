@@ -37,14 +37,22 @@ type ClaveUbicacion = 'misa' | 'recepcion';
       <div
         class="w-full overflow-hidden rounded-3xl border border-white/60 bg-white/50 text-center shadow-xl shadow-neutro/50 backdrop-blur-md"
       >
-        @if (!imagenFallida()) {
-          <img
-            [src]="ubicacion().imagenUrl"
-            [alt]="ubicacion().nombre"
-            loading="lazy"
-            (error)="imagenFallida.set(true)"
-            class="h-auto w-full"
-          />
+        <!-- Ambas imágenes apiladas: la activa se funde suavemente sobre la otra -->
+        @if (imagenesFallidas().size < opciones.length) {
+          <div class="relative aspect-video w-full">
+            @for (opcion of opciones; track opcion.valor) {
+              @if (!imagenesFallidas().has(opcion.valor)) {
+                <img
+                  [src]="config.ubicaciones[opcion.valor].imagenUrl"
+                  [alt]="config.ubicaciones[opcion.valor].nombre"
+                  loading="lazy"
+                  (error)="marcarImagenFallida(opcion.valor)"
+                  class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out"
+                  [class.opacity-0]="seleccion() !== opcion.valor"
+                />
+              }
+            }
+          </div>
         }
 
         <div class="p-8">
@@ -91,7 +99,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
   `,
 })
 export class LocationsComponent {
-  private readonly config = INVITATION_CONFIG;
+  protected readonly config = INVITATION_CONFIG;
 
   protected readonly opciones: { etiqueta: string; valor: ClaveUbicacion; icono: string }[] = [
     { etiqueta: 'Ceremonia Religiosa', valor: 'misa', icono: 'pi-heart' },
@@ -100,8 +108,8 @@ export class LocationsComponent {
 
   protected readonly seleccion = signal<ClaveUbicacion>('misa');
 
-  /** Oculta la imagen si el archivo aún no existe en src/assets/img/. */
-  protected readonly imagenFallida = signal(false);
+  /** Oculta cada imagen cuyo archivo falte en src/assets/img/. */
+  protected readonly imagenesFallidas = signal<ReadonlySet<ClaveUbicacion>>(new Set());
 
   protected readonly ubicacion = computed<Ubicacion>(
     () => this.config.ubicaciones[this.seleccion()],
@@ -114,6 +122,9 @@ export class LocationsComponent {
 
   protected cambiarSeleccion(valor: ClaveUbicacion): void {
     this.seleccion.set(valor);
-    this.imagenFallida.set(false);
+  }
+
+  protected marcarImagenFallida(valor: ClaveUbicacion): void {
+    this.imagenesFallidas.update((fallidas) => new Set(fallidas).add(valor));
   }
 }
