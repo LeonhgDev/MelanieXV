@@ -120,6 +120,6 @@ export const INVITATION_CONFIG: InvitationConfig = {
     colorReservado: { nombre: 'Azul', hex: '#1e40af' },
     imagenUrl: 'assets/img/CodigoVestimenta.png',
   },
-  musicaUrl: 'assets/sounds/BirdsOfFeather.mp3',
+  musicaUrl: 'assets/sounds/BirdsOfFeatherLoop.mp3',
   heroImagenUrl: 'hero.jpg',
 };
