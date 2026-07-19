@@ -95,14 +95,16 @@ export const INVITATION_CONFIG: InvitationConfig = {
       hora: '18:45 hrs',
       direccion:
         'Francisco del Paso Y Troncoso 307, Jardín Balbuena, Venustiano Carranza, 15900 CDMX',
-      mapsUrl: 'https://maps.app.goo.gl/hGEwBvVpamMZRpan9',
+      mapsUrl:
+        'https://www.google.com/maps/search/?api=1&query=Parroquia+Nuestra+Se%C3%B1ora+Aparecida+del+Brasil%2C+Francisco+del+Paso+y+Troncoso+307%2C+Jard%C3%ADn+Balbuena%2C+CDMX',
       imagenUrl: 'assets/img/CeremoniaReligiosa.jpg',
     },
     recepcion: {
       nombre: 'Salón de Fiestas Portofino',
       hora: '19:45 hrs',
       direccion: 'Calle Ote. 172 21, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX',
-      mapsUrl: 'https://maps.app.goo.gl/PJ3cFyz1iSYEQXUv6',
+      mapsUrl:
+        'https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n+Portofino%2C+Calle+Ote.+172+21%2C+Moctezuma+2da+Secc%2C+Venustiano+Carranza%2C+CDMX',
       imagenUrl: 'assets/img/Recepcion.png',
     },
   },
