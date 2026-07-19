@@ -47,7 +47,7 @@ type ClaveUbicacion = 'misa' | 'recepcion';
                   [alt]="config.ubicaciones[opcion.valor].nombre"
                   loading="lazy"
                   (error)="marcarImagenFallida(opcion.valor)"
-                  class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out"
+                  class="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1500ms] ease-in-out"
                   [class.opacity-0]="seleccion() !== opcion.valor"
                 />
               }
