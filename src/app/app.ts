@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToastModule } from 'primeng/toast';
+import { IntroGateComponent } from './components/intro-gate.component';
 import { HeroComponent } from './components/hero.component';
 import { AudioPlayerComponent } from './components/audio-player.component';
 import { CountdownComponent } from './components/countdown.component';
@@ -17,6 +18,7 @@ import { INVITATION_CONFIG } from './invitation-config';
   selector: 'app-root',
   imports: [
     ToastModule,
+    IntroGateComponent,
     HeroComponent,
     AudioPlayerComponent,
     CountdownComponent,

@@ -313,3 +313,106 @@ body {
     transition: none;
   }
 }
+
+/* Portones de bienvenida: IntroGateComponent los desliza a los lados al cargar */
+.puerta-hoja {
+  transition: transform 3.2s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+  transform: scaleY(1.6);
+  backface-visibility: hidden;
+}
+
+.puerta-hoja--izquierda {
+  transform-origin: left center;
+}
+
+.puerta-hoja--derecha {
+  transform-origin: right center;
+}
+
+.puerta-hoja--abierta-izquierda {
+  transform: scaleY(1.6) rotateY(-100deg);
+}
+
+.puerta-hoja--abierta-derecha {
+  transform: scaleY(1.6) rotateY(100deg);
+}
+
+/* Revelado del hero, sincronizado con IntroService/IntroGateComponent */
+.letra-intro {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transition:
+    opacity 0.7s ease-out,
+    filter 0.7s ease-out;
+}
+
+.letra-intro--visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.nombre-intro {
+  opacity: 0;
+  filter: blur(18px);
+  transition:
+    opacity 1.6s ease-out,
+    filter 1.6s ease-out;
+  transition-delay: 0.8s;
+}
+
+.nombre-intro--visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.figura-intro {
+  opacity: 0;
+  filter: blur(18px);
+  transition:
+    opacity 1.6s ease-out,
+    filter 1.6s ease-out;
+  transition-delay: 0.8s;
+}
+
+.figura-intro--visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.fecha-intro,
+.frase-intro {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s ease-out,
+    transform 1s ease-out;
+}
+
+.fecha-intro {
+  transition-delay: 1.6s;
+}
+
+.frase-intro {
+  transition-delay: 1.9s;
+}
+
+.fecha-intro--visible,
+.frase-intro--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letra-intro,
+  .nombre-intro,
+  .figura-intro,
+  .fecha-intro,
+  .frase-intro {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}

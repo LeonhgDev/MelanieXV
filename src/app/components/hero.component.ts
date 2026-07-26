@@ -1,5 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { INVITATION_CONFIG } from '../invitation-config';
+import { IntroService } from '../services/intro.service';
+
+const ETIQUETA_INTRO = 'Mis XV Años';
+const PASO_LETRA_MS = 70;
 
 @Component({
   selector: 'app-hero',
@@ -25,19 +29,49 @@ import { INVITATION_CONFIG } from '../invitation-config';
       />
 
       <div class="relative flex flex-col items-center gap-6">
-        <p class="text-sm font-light tracking-[0.4em] text-tinta-suave uppercase">Mis XV Años</p>
+        <p
+          class="flex text-sm font-light tracking-[0.4em] text-tinta-suave uppercase"
+          aria-label="Mis XV Años"
+        >
+          @for (letra of etiquetaLetras; track $index) {
+            <span
+              class="letra-intro"
+              [class.letra-intro--visible]="intro.abriendo()"
+              [style.transition-delay.ms]="retrasoLetra($index)"
+              aria-hidden="true"
+              >{{ letra === ' ' ? ' ' : letra }}</span
+            >
+          }
+        </p>
 
-        <h1 class="font-script text-7xl text-acento drop-shadow-sm sm:text-8xl md:text-9xl">
+        <h1
+          class="nombre-intro font-script text-7xl text-acento drop-shadow-sm sm:text-8xl md:text-9xl"
+          [class.nombre-intro--visible]="intro.abriendo()"
+        >
           {{ config.nombreQuinceanera }}
         </h1>
 
-        <div class="flex items-center gap-4 text-tinta-suave">
+        <img
+          src="assets/img/MXV_Espalda.png"
+          alt=""
+          aria-hidden="true"
+          class="figura-intro h-48 w-auto select-none sm:h-64 md:h-72"
+          [class.figura-intro--visible]="intro.abriendo()"
+        />
+
+        <div
+          class="fecha-intro flex items-center gap-4 text-tinta-suave"
+          [class.fecha-intro--visible]="intro.abriendo()"
+        >
           <span class="h-px w-12 bg-acento-suave"></span>
           <p class="font-serif text-xl tracking-wide capitalize">{{ fechaLegible }}</p>
           <span class="h-px w-12 bg-acento-suave"></span>
         </div>
 
-        <p class="max-w-xs font-serif text-lg text-tinta-suave italic">
+        <p
+          class="frase-intro max-w-xs font-serif text-lg text-tinta-suave italic"
+          [class.frase-intro--visible]="intro.abriendo()"
+        >
           {{ config.fraseBienvenida }}
         </p>
       </div>
@@ -55,6 +89,7 @@ import { INVITATION_CONFIG } from '../invitation-config';
 })
 export class HeroComponent {
   protected readonly config = INVITATION_CONFIG;
+  protected readonly intro = inject(IntroService);
 
   protected readonly fechaLegible = new Intl.DateTimeFormat('es-MX', {
     weekday: 'long',
@@ -62,4 +97,11 @@ export class HeroComponent {
     month: 'long',
     year: 'numeric',
   }).format(INVITATION_CONFIG.fechaEvento);
+
+  /** Letras de "Mis XV Años"; se revelan de derecha a izquierda al abrir los portones. */
+  protected readonly etiquetaLetras = ETIQUETA_INTRO.split('');
+
+  protected retrasoLetra(indice: number): number {
+    return (this.etiquetaLetras.length - 1 - indice) * PASO_LETRA_MS;
+  }
 }
