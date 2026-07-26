@@ -73,7 +73,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
   fraseBienvenida: '¡Acompáñanos a celebrar!',
   fechaEvento: new Date('2026-08-08T18:45:00'),
   codigoPaisWhatsapp: '52',
-  whatsappConfirmacion: '5545329137',
+  whatsappConfirmacion: '5532420009',
   whatsappFelicitaciones: '5638206542',
   familia: {
     grupos: [

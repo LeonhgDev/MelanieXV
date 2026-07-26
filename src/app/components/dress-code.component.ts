@@ -23,24 +23,6 @@ import { INVITATION_CONFIG } from '../invitation-config';
         <i class="pi pi-sparkles mb-4 text-3xl text-acento" aria-hidden="true"></i>
 
         <h3 class="font-serif text-3xl text-tinta">{{ vestimenta.titulo }}</h3>
-        <p class="mt-2 text-sm font-light text-tinta-suave">
-          Colores sugeridos para nuestros invitados
-        </p>
-
-        <!-- Paleta de colores sugerida -->
-        <div class="mt-6 grid grid-cols-3 gap-4 sm:grid-cols-6">
-          @for (color of vestimenta.paletaSugerida; track color.nombre) {
-            <div class="group flex flex-col items-center gap-2">
-              <span
-                class="h-10 w-10 rounded-full border border-neutro shadow-md transition-transform duration-300 group-hover:scale-110"
-                [style.background-color]="color.hex"
-              ></span>
-              <span class="text-[10px] font-light tracking-wide text-tinta-suave">
-                {{ color.nombre }}
-              </span>
-            </div>
-          }
-        </div>
 
         <!-- Advertencia elegante: color reservado -->
         <div

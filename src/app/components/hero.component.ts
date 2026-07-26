@@ -22,7 +22,7 @@ const PASO_LETRA_MS = 70;
 
       <div class="relative flex flex-col items-center gap-6">
         <p
-          class="flex text-sm font-light tracking-[0.4em] text-tinta-suave uppercase"
+          class="etiqueta-fondo-doble flex text-[1.05rem] font-light tracking-[0.4em] text-tinta-suave uppercase"
           aria-label="Mis XV Años"
         >
           @for (letra of etiquetaLetras; track $index) {
