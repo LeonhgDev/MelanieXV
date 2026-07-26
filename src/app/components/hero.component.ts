@@ -20,22 +20,6 @@ const PASO_LETRA_MS = 70;
       <!-- Overlay translúcido -->
       <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
 
-      <!-- Marco floral superior: se desvanece en su borde inferior para fundirse con el fondo -->
-      <img
-        src="assets/img/FondoSuperiorBlanco.png"
-        alt=""
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-x-0 top-0 max-h-[40svh] w-full object-cover object-top select-none [mask-image:linear-gradient(to_bottom,black_65%,transparent)]"
-      />
-
-      <!-- Marco floral inferior: se desvanece en su borde superior para fundirse con el fondo -->
-      <img
-        src="assets/img/FondoInferiorBlanco.png"
-        alt=""
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-x-0 bottom-0 max-h-[40svh] w-full object-cover object-bottom select-none [mask-image:linear-gradient(to_top,black_65%,transparent)]"
-      />
-
       <div class="relative flex flex-col items-center gap-6">
         <p
           class="flex text-sm font-light tracking-[0.4em] text-tinta-suave uppercase"
@@ -72,7 +56,7 @@ const PASO_LETRA_MS = 70;
           [class.fecha-intro--visible]="intro.abriendo()"
         >
           <span class="h-px w-12 bg-acento-suave"></span>
-          <p class="font-serif text-xl tracking-wide capitalize">{{ fechaLegible }}</p>
+          <p class="font-serif text-xl tracking-wide text-blue-800">{{ fechaLegible }}</p>
           <span class="h-px w-12 bg-acento-suave"></span>
         </div>
 
@@ -99,17 +83,30 @@ export class HeroComponent {
   protected readonly config = INVITATION_CONFIG;
   protected readonly intro = inject(IntroService);
 
-  protected readonly fechaLegible = new Intl.DateTimeFormat('es-MX', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(INVITATION_CONFIG.fechaEvento);
+  protected readonly fechaLegible = this.construirFechaLegible(INVITATION_CONFIG.fechaEvento);
 
   /** Letras de "Mis XV Años"; se revelan de derecha a izquierda al abrir los portones. */
   protected readonly etiquetaLetras = ETIQUETA_INTRO.split('');
 
   protected retrasoLetra(indice: number): number {
     return (this.etiquetaLetras.length - 1 - indice) * PASO_LETRA_MS;
+  }
+
+  /** "sábado, 8 de agosto de 2026" -> "Sábado, 8 de Agosto de 2026" (día y mes con mayúscula inicial). */
+  private construirFechaLegible(fecha: Date): string {
+    const partes = new Intl.DateTimeFormat('es-MX', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).formatToParts(fecha);
+
+    return partes
+      .map((parte) =>
+        parte.type === 'weekday' || parte.type === 'month'
+          ? parte.value.charAt(0).toUpperCase() + parte.value.slice(1)
+          : parte.value,
+      )
+      .join('');
   }
 }

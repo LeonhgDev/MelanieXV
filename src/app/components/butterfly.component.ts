@@ -79,7 +79,7 @@ export class ButterflyComponent implements OnInit, OnDestroy {
 
       if (debeSalir) {
         this.yaVolando = true;
-        this.iniciarSalida();
+        this.iniciarSalida(DURACION_SALIDA_S);
         return;
       }
 
@@ -100,15 +100,15 @@ export class ButterflyComponent implements OnInit, OnDestroy {
     clearTimeout(this.temporizador);
   }
 
-  private iniciarSalida(): void {
+  private iniciarSalida(duracionSegundos: number): void {
     clearTimeout(this.temporizador);
 
     this.volando.set(true);
-    this.duracion.set(DURACION_SALIDA_S);
+    this.duracion.set(duracionSegundos);
     this.angulo.set(this.posicionAleatoria(-15, 15));
     this.x.set(this.posicionAleatoria(-10, 110));
     this.y.set(-25);
-    this.temporizador = setTimeout(() => this.visible.set(false), DURACION_SALIDA_S * 1000);
+    this.temporizador = setTimeout(() => this.visible.set(false), duracionSegundos * 1000);
   }
 
   private volarASiguientePunto(): void {

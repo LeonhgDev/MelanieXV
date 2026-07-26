@@ -17,14 +17,15 @@ export class IntroService {
   readonly abriendo = signal(this.prefiereMenosMovimiento);
   readonly portonesVisibles = signal(!this.prefiereMenosMovimiento);
   /** Se pone en true la primera vez que el usuario hace scroll hacia abajo. */
+  /** true mientras el usuario está desplazado hacia abajo; vuelve a false al regresar arriba. */
   readonly desplazado = signal(false);
 
   constructor() {
+    // Se compara contra la posición inicial (no un valor absoluto) por si el
+    // navegador restaura el scroll de una visita anterior al recargar.
+    const scrollInicial = window.scrollY;
     const alHacerScroll = () => {
-      if (window.scrollY > 40) {
-        this.desplazado.set(true);
-        window.removeEventListener('scroll', alHacerScroll);
-      }
+      this.desplazado.set(window.scrollY - scrollInicial > 40);
     };
     window.addEventListener('scroll', alHacerScroll, { passive: true });
 

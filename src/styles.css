@@ -439,3 +439,27 @@ body {
     transform: scaleX(0.7);
   }
 }
+
+/* Marco floral superior: se recorta a la mitad al hacer scroll (FlowerFrameComponent) */
+.marco-superior {
+  transition:
+    max-height 1s ease-out,
+    object-position 1s ease-out;
+}
+
+.marco-superior--recortado {
+  max-height: 14.4svh;
+  object-position: bottom;
+}
+
+/* Marco floral inferior: espejo del superior, se recorta hacia el centro al hacer scroll */
+.marco-inferior {
+  transition:
+    max-height 1s ease-out,
+    object-position 1s ease-out;
+}
+
+.marco-inferior--recortado {
+  max-height: 14.4svh;
+  object-position: top;
+}

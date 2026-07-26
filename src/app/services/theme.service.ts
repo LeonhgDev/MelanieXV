@@ -98,7 +98,7 @@ export class ThemeService {
   readonly paleta = signal<OpcionPaleta>(this.buscar(this.paletas, 'oceano'));
   readonly fuente = signal<OpcionFuente>(this.buscar(this.fuentes, 'parisienne'));
   readonly fondo = signal<OpcionFondo>(this.buscar(this.fondos, 'aurora'));
-  readonly fuenteNombres = signal<OpcionFuente>(this.buscar(this.fuentesNombres, 'sacramento'));
+  readonly fuenteNombres = signal<OpcionFuente>(this.buscar(this.fuentesNombres, 'dancing'));
   readonly colorNombres = signal<OpcionColorTexto>(this.buscar(this.coloresNombres, 'tinta'));
 
   /** Clases combinadas para el contenedor raíz. */

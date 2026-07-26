@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToastModule } from 'primeng/toast';
 import { IntroGateComponent } from './components/intro-gate.component';
 import { ButterflyFlockComponent } from './components/butterfly-flock.component';
+import { FlowerFrameComponent } from './components/flower-frame.component';
 import { HeroComponent } from './components/hero.component';
 import { AudioPlayerComponent } from './components/audio-player.component';
 import { CountdownComponent } from './components/countdown.component';
@@ -10,7 +11,6 @@ import { LocationsComponent } from './components/locations.component';
 import { DressCodeComponent } from './components/dress-code.component';
 import { GiftsComponent } from './components/gifts.component';
 import { RsvpComponent } from './components/rsvp.component';
-import { ThemeTogglerComponent } from './components/theme-toggler.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
 import { ThemeService } from './services/theme.service';
 import { INVITATION_CONFIG } from './invitation-config';
@@ -21,6 +21,7 @@ import { INVITATION_CONFIG } from './invitation-config';
     ToastModule,
     IntroGateComponent,
     ButterflyFlockComponent,
+    FlowerFrameComponent,
     HeroComponent,
     AudioPlayerComponent,
     CountdownComponent,
@@ -29,7 +30,6 @@ import { INVITATION_CONFIG } from './invitation-config';
     DressCodeComponent,
     GiftsComponent,
     RsvpComponent,
-    ThemeTogglerComponent,
     RevealOnScrollDirective,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
