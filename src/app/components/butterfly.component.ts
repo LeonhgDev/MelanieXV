@@ -14,7 +14,9 @@ export interface PosicionMariposa {
  * Una mariposa: empieza posada en `posicionInicial` (sobre las flores del
  * marco inferior) y, en cuanto IntroService marca que los portones se están
  * abriendo, si `saleVolando` es true se va volando fuera de pantalla y
- * desaparece; si no, se queda vagando al azar por la página.
+ * desaparece; si no, se queda vagando al azar por la página hasta que el
+ * usuario hace scroll (IntroService.desplazado), momento en el que también
+ * sale volando y desaparece.
  */
 @Component({
   selector: 'app-butterfly',
@@ -55,13 +57,36 @@ export class ButterflyComponent implements OnInit, OnDestroy {
   protected readonly visible = signal(true);
 
   private temporizador?: ReturnType<typeof setTimeout>;
-  private empezoAVolar = false;
+  private empezoAVagar = false;
+  private yaVolando = false;
 
   constructor() {
     effect(() => {
-      if (this.intro.abriendo() && !this.empezoAVolar) {
-        this.empezoAVolar = true;
-        this.iniciarVuelo();
+      const abriendo = this.intro.abriendo();
+      const desplazado = this.intro.desplazado();
+
+      if (!abriendo || this.yaVolando) return;
+
+      const debeSalir = this.saleVolando || desplazado;
+
+      if (this.reduccionMovimiento) {
+        if (debeSalir) {
+          this.yaVolando = true;
+          this.visible.set(false);
+        }
+        return;
+      }
+
+      if (debeSalir) {
+        this.yaVolando = true;
+        this.iniciarSalida();
+        return;
+      }
+
+      if (!this.empezoAVagar) {
+        this.empezoAVagar = true;
+        this.volando.set(true);
+        this.volarASiguientePunto();
       }
     });
   }
@@ -75,24 +100,15 @@ export class ButterflyComponent implements OnInit, OnDestroy {
     clearTimeout(this.temporizador);
   }
 
-  private iniciarVuelo(): void {
-    if (this.reduccionMovimiento) {
-      if (this.saleVolando) this.visible.set(false);
-      return;
-    }
+  private iniciarSalida(): void {
+    clearTimeout(this.temporizador);
 
     this.volando.set(true);
-
-    if (this.saleVolando) {
-      this.duracion.set(DURACION_SALIDA_S);
-      this.angulo.set(this.posicionAleatoria(-15, 15));
-      this.x.set(this.posicionAleatoria(-10, 110));
-      this.y.set(-25);
-      this.temporizador = setTimeout(() => this.visible.set(false), DURACION_SALIDA_S * 1000);
-      return;
-    }
-
-    this.volarASiguientePunto();
+    this.duracion.set(DURACION_SALIDA_S);
+    this.angulo.set(this.posicionAleatoria(-15, 15));
+    this.x.set(this.posicionAleatoria(-10, 110));
+    this.y.set(-25);
+    this.temporizador = setTimeout(() => this.visible.set(false), DURACION_SALIDA_S * 1000);
   }
 
   private volarASiguientePunto(): void {

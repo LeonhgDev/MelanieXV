@@ -16,8 +16,18 @@ export class IntroService {
 
   readonly abriendo = signal(this.prefiereMenosMovimiento);
   readonly portonesVisibles = signal(!this.prefiereMenosMovimiento);
+  /** Se pone en true la primera vez que el usuario hace scroll hacia abajo. */
+  readonly desplazado = signal(false);
 
   constructor() {
+    const alHacerScroll = () => {
+      if (window.scrollY > 40) {
+        this.desplazado.set(true);
+        window.removeEventListener('scroll', alHacerScroll);
+      }
+    };
+    window.addEventListener('scroll', alHacerScroll, { passive: true });
+
     if (this.prefiereMenosMovimiento) return;
 
     document.body.style.overflow = 'hidden';
