@@ -416,3 +416,26 @@ body {
     transition: none;
   }
 }
+
+/* Mariposa decorativa: ButterflyComponent le asigna un nuevo punto al azar */
+.mariposa {
+  transition:
+    left var(--vuelo-duracion, 4s) ease-in-out,
+    top var(--vuelo-duracion, 4s) ease-in-out,
+    transform var(--vuelo-duracion, 4s) ease-in-out;
+  will-change: left, top, transform;
+}
+
+.mariposa-aleteo {
+  transform-origin: center;
+  animation: aleteo 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes aleteo {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0.7);
+  }
+}

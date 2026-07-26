@@ -28,6 +28,14 @@ const PASO_LETRA_MS = 70;
         class="pointer-events-none absolute inset-x-0 top-0 max-h-[40svh] w-full object-cover object-top select-none [mask-image:linear-gradient(to_bottom,black_65%,transparent)]"
       />
 
+      <!-- Marco floral inferior: se desvanece en su borde superior para fundirse con el fondo -->
+      <img
+        src="assets/img/FondoInferiorBlanco.png"
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 bottom-0 max-h-[40svh] w-full object-cover object-bottom select-none [mask-image:linear-gradient(to_top,black_65%,transparent)]"
+      />
+
       <div class="relative flex flex-col items-center gap-6">
         <p
           class="flex text-sm font-light tracking-[0.4em] text-tinta-suave uppercase"
