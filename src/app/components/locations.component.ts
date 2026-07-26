@@ -28,7 +28,12 @@ type ClaveUbicacion = 'misa' | 'recepcion';
                 : 'text-tinta-suave hover:bg-acento-claro/50 hover:text-acento'
             "
           >
-            <i class="pi text-xs" [class]="opcion.icono" aria-hidden="true"></i>
+            <i
+              class="pi text-xs"
+              [class]="opcion.icono"
+              [class.motion-safe:animate-latido]="seleccion() !== opcion.valor"
+              aria-hidden="true"
+            ></i>
             {{ opcion.etiqueta }}
           </button>
         }

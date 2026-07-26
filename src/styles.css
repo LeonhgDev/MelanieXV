@@ -398,10 +398,15 @@ body {
   transition-delay: 1.9s;
 }
 
-.fecha-intro--visible,
-.frase-intro--visible {
+.fecha-intro--visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.frase-intro--visible {
+  opacity: 1;
+  /* Un poco más arriba que translateY(0) para no quedar tapada por una hoja del marco inferior */
+  transform: translateY(-14px);
 }
 
 @media (prefers-reduced-motion: reduce) {

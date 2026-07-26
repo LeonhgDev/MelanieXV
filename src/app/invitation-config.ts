@@ -101,8 +101,8 @@ export const INVITATION_CONFIG: InvitationConfig = {
     },
     recepcion: {
       nombre: 'Salón de Fiestas Portofino',
-      hora: '19:45 hrs',
-      direccion: 'Calle Ote. 172 21, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX',
+      hora: '20:00 hrs',
+      direccion: 'Calle Ote. 172 Número 21, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX',
       mapsUrl:
         'https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n+Portofino%2C+Calle+Ote.+172+21%2C+Moctezuma+2da+Secc%2C+Venustiano+Carranza%2C+CDMX',
       imagenUrl: 'assets/img/Recepcion.png',
