@@ -20,22 +20,7 @@ const PASO_LETRA_MS = 70;
       <!-- Overlay translúcido -->
       <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
 
-      <div class="relative flex flex-col items-center gap-6">
-        <p
-          class="etiqueta-fondo-doble flex text-[1.05rem] font-light tracking-[0.4em] text-tinta-suave uppercase"
-          aria-label="Mis XV Años"
-        >
-          @for (letra of etiquetaLetras; track $index) {
-            <span
-              class="letra-intro"
-              [class.letra-intro--visible]="intro.abriendo()"
-              [style.transition-delay.ms]="retrasoLetra($index)"
-              aria-hidden="true"
-              >{{ letra === ' ' ? ' ' : letra }}</span
-            >
-          }
-        </p>
-
+      <div class="relative flex translate-y-[10%] flex-col items-center gap-6">
         <h1
           class="nombre-intro font-script text-7xl text-acento drop-shadow-sm sm:text-8xl md:text-9xl"
           [class.nombre-intro--visible]="intro.abriendo()"
@@ -50,6 +35,21 @@ const PASO_LETRA_MS = 70;
           class="figura-intro h-48 w-auto select-none sm:h-64 md:h-72"
           [class.figura-intro--visible]="intro.abriendo()"
         />
+
+        <p
+          class="etiqueta-fondo-doble flex text-[1.05rem] font-light tracking-[0.4em] text-tinta-suave uppercase"
+          aria-label="Mis XV Años"
+        >
+          @for (letra of etiquetaLetras; track $index) {
+            <span
+              class="letra-intro"
+              [class.letra-intro--visible]="intro.abriendo()"
+              [style.transition-delay.ms]="retrasoLetra($index)"
+              aria-hidden="true"
+              >{{ letra === ' ' ? ' ' : letra }}</span
+            >
+          }
+        </p>
 
         <div
           class="fecha-intro flex items-center gap-4 text-tinta-suave"
